@@ -14,11 +14,16 @@ module Brisbane
       if self.paginator.next?
         self.paginator.next!
         process
+      else
+        FileUtils.cp File.join(self.dest, "page1", "index.htm"), 
+                     File.join(self.dest, "index.htm")
       end
     end
     
     def render
-      File.open(File.join(self.dest, "page#{self.paginator.current_page}.htm"), "w") do |file|
+      dir = File.join(self.dest, "page#{self.paginator.current_page}")
+      FileUtils.mkdir_p(dir) unless File.exists?(dir)
+      File.open(File.join(dir, "index.htm"), "w") do |file|
         file.write self.template.result(Page.new(self.paginator).binding)
       end
     end    

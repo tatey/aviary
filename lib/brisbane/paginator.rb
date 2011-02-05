@@ -16,17 +16,25 @@ module Brisbane
     def next?
       self.current_page < self.last_page
     end
+    
+    def next_page
+      self.current_page + 1
+    end
   
     def next!
-      @current_page += 1
+      @current_page = next_page
     end
   
     def prev?
       self.current_page > self.first_page
     end
+    
+    def prev_page
+      self.current_page - 1
+    end
   
     def prev!
-      @current_page -= 1
+      @current_page = prev_page
     end
   end
 end

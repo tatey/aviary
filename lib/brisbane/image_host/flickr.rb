@@ -22,7 +22,7 @@ module Brisbane
   
     def src
       "http://farm#{self.meta[:farm_id]}.static.flickr.com/" + 
-      "#{self.meta[:server_id]}/#{self.meta[:id]}_#{self.meta[:secret]}_m.jpg"
+      "#{self.meta[:server_id]}/#{self.meta[:id]}_#{self.meta[:secret]}_z.jpg"
     end
     
     protected

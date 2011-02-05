@@ -6,7 +6,7 @@ module Brisbane
     end
     
     def h(string)
-      CGI.escapeHTML(string)
+      string.gsub('<', '&lt;').gsub('>', '&gt;')
     end
     
     def binding

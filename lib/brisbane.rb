@@ -1,5 +1,5 @@
-require 'cgi'
 require 'erb'
+require 'fileutils'
 require 'open-uri'
 
 require 'base58'
