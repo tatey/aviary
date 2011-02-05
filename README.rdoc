@@ -2,11 +2,11 @@
 
 Create a raw collection of photos tweeted with a hashtag. Very much a work-in-progress.
 
-= Examples
+== Examples
 
-* #tcyasi[http://tcyasi.tatey.com/]
-* #vicfloods[http://vicfloods.tatey.com/]
+* tcyasi[http://tcyasi.tatey.com/]
+* vicfloods[http://vicfloods.tatey.com/]
 
-= Copyright
+== Copyright
 
 Copyright © 2010 Tate Johnson. See LICENSE for details.
