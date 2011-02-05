@@ -1,7 +1,5 @@
 module Brisbane
   class ImageHost::Plixi < ImageHost
-    property :meta, Object
-    
     before :create, :set_meta
     
     matches /plixi\.com\/p\/(\d+)/

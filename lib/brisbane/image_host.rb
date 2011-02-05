@@ -6,6 +6,7 @@ module Brisbane
     property :type,   Discriminator
     property :token,  String, :unique => true, :auto_validation => true
     property :status, Object
+    property :meta,   Object
         
     def self.available
       @available ||= descendants.select { |d| d.available? }

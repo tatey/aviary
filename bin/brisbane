@@ -54,5 +54,5 @@ if options[:parser]
 end
 
 if options[:site]
-  Brisbane::Site.new.process
+  Brisbane::Site.new(Brisbane.configuration[:source], Brisbane.configuration[:dest]).process
 end

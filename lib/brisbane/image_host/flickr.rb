@@ -1,7 +1,5 @@
 module Brisbane
   class ImageHost::Flickr < ImageHost
-    property :meta, Object
-        
     before :create, :set_meta
   
     matches /flic\.kr\/p\/(\w+)/

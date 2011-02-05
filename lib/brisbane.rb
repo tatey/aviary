@@ -1,5 +1,6 @@
-require 'open-uri'
+require 'cgi'
 require 'erb'
+require 'open-uri'
 
 require 'base58'
 require 'dm-core'
@@ -13,13 +14,15 @@ require 'brisbane/image_host/flickr'
 require 'brisbane/image_host/plixi'
 require 'brisbane/image_host/twitpic'
 require 'brisbane/image_host/yfrog'
+require 'brisbane/page'
+require 'brisbane/paginator'
 require 'brisbane/parser'
 require 'brisbane/site'
 
 module Brisbane
   DEFAULT = {
     :source         => Dir.pwd,
-    :destination    => File.join(Dir.pwd, '_site'),
+    :dest           => File.join(Dir.pwd, '_site'),
     :flickr_api_key => nil
   }
   
