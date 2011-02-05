@@ -5,54 +5,40 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'optparse'
 require 'brisbane'
 
-tag     = nil
-options = {:parser => true, :site => true}
+options = {}
 
 OptionParser.new do |o|  
-  o.banner = 'Usage: brisbane <tag> [options]'
+  o.banner = 'Usage: brisbane <command> [argument] [options...]'
   
   o.on('--destination DIR') do |arg|
-    options[:destination] = arg
+    options[:dest] = arg
   end
   
   o.on('--source DIR') do |arg|
     options[:source] = arg
   end
   
-  o.on('--no-parser') do |arg|
-    options[:parser] = false
-  end
-  
-  o.on('--no-site') do |arg|
-    options[:site] = false
-  end  
-  
   o.on('--flickr-api-key KEY') do |arg|
     options[:flickr_api_key] = arg
-  end
-  
-  o.on('--verbose') do |arg|
-    # TODO
   end
           
   o.parse!(ARGV)
 end
 
-case ARGV.size
-when 1
-  tag = ARGV[0]
+command, argument = ARGV[0..1]
+
+Brisbane.configuration(Brisbane::Configuration.new(options, :default).options)
+
+# TODO: We're not always checking the second argument
+
+case command
+when 'new'
+  Brisbane::Generator.new(argument).process
+when 'build'
+  Brisbane::Site.new.process
+when 'parse'
+  Brisbane::Parser.new(argument).process
 else
-  puts "Invalid options. Run `brisbane --help` for assistance."
+  puts "Invalid command. Run `brisbane --help` for assistance."
   exit 1
-end
-
-Brisbane.configuration(options)
-Brisbane.setup
-
-if options[:parser]
-  Brisbane::Parser.new(tag).process
-end
-
-if options[:site]
-  Brisbane::Site.new(Brisbane.configuration[:source], Brisbane.configuration[:dest]).process
 end

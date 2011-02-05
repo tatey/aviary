@@ -1,6 +1,11 @@
 = Brisbane
 
-Turn a twitter hashtag into a gallery of photos. Very much a work-in-progress.
+Create a raw collection of photos tweeted with a hashtag. Very much a work-in-progress.
+
+= Examples
+
+* #tcyasi[http://tcyasi.tatey.com/]
+* #vicfloods[http://vicfloods.tatey.com/]
 
 = Copyright
 
