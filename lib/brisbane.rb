@@ -20,10 +20,3 @@ require 'brisbane/page'
 require 'brisbane/paginator'
 require 'brisbane/parser'
 require 'brisbane/site'
-
-module Brisbane
-  def self.configuration(configuration = nil)
-    @configuration = configuration if configuration
-    @configuration
-  end
-end

@@ -5,8 +5,13 @@ module Brisbane
     matches /flic\.kr\/p\/(\w+)/
     matches /flickr\.com\/photos\/\w+\/(\d+)/
     
+    def self.api_key(key = nil)
+      @api_key = key if key
+      @api_key
+    end
+    
     def self.available?
-      !Brisbane.configuration[:flickr_api_key].nil?
+      !api_key.nil?
     end
     
     def self.match_and_create(status)

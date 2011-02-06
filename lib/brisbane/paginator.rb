@@ -2,15 +2,15 @@ module Brisbane
   class Paginator
     attr_reader :per_page, :current_page, :first_page, :last_page
   
-    def initialize
-      @per_page     = 25
+    def initialize(per_page)
+      @per_page     = per_page
       @current_page = 1
       @first_page   = 1
       @last_page    = ImageHost.count / self.per_page
     end
     
     def query_options
-      {:limit => self.per_page, :offset => self.per_page * (self.current_page)}
+      {:limit => self.per_page, :offset => self.per_page * (self.current_page - 1)}
     end
         
     def next?

@@ -1,6 +1,6 @@
 = Brisbane
 
-Create a raw collection of photos tweeted with a hashtag. Very much a work-in-progress.
+Brisbane generates a static photo gallery from Twitter hashtags. Very much a work-in-progress.
 
 == Examples
 

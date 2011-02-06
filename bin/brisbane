@@ -5,40 +5,100 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'optparse'
 require 'brisbane'
 
+command = nil
 options = {}
+help    = <<-HELP
+Brisbane generates a static photo gallery from Twitter hashtags.
 
-OptionParser.new do |o|  
-  o.banner = 'Usage: brisbane <command> [argument] [options...]'
+Usage:
+  brisbane new   NAME    [hashtag]     # Setup files and directories
+  brisbane fetch HASHTAG [options...]  # Fetch tagged tweets with photos
+  brisbane build         [options...]  # Build gallery
+
+Example:
+  brisbane new ~/qldfloods 
+  brisbane fetch qldfloods
+  brisbane build
   
-  o.on('--destination DIR') do |arg|
-    options[:dest] = arg
-  end
-  
-  o.on('--source DIR') do |arg|
-    options[:source] = arg
-  end
-  
-  o.on('--flickr-api-key KEY') do |arg|
-    options[:flickr_api_key] = arg
-  end
-          
-  o.parse!(ARGV)
-end
+Help:
+  brisbane <command> --help
 
-command, argument = ARGV[0..1]
+HELP
 
-Brisbane.configuration(Brisbane::Configuration.new(options, :default).options)
-
-# TODO: We're not always checking the second argument
-
-case command
+case ARGV[0]
 when 'new'
-  Brisbane::Generator.new(argument).process
+  OptionParser.new do |o|  
+    o.banner = 'Usage: brisbane new NAME [hashtag]'
+    
+    o.on('--hashtag TAG') do |arg|
+      options[:hashtag] = arg
+    end
+
+    o.parse!(ARGV)
+  end
+  
+  if ARGV.size == 2
+    options[:source] = File.join(Dir.pwd, ARGV[1])
+    command          = Proc.new { |config| Brisbane::Generator.new(config) }
+  else
+    puts "Invalid argument. Run `brisbane new --help` for assistance."
+    exit 1
+  end
+when 'fetch'
+  OptionParser.new do |o|  
+    o.banner = 'Usage: brisbane fetch HASHTAG [options...]'
+    
+    o.on('--destination DIR') do |arg|
+      options[:dest] = arg
+    end
+
+    o.on('--source DIR') do |arg|
+      options[:source] = arg
+    end
+    
+    o.on('--flickr-api-key KEY') do |arg|
+      options[:flickr_api_key] = arg
+    end
+    
+    o.on('--limit COUNT', Integer) do |arg|
+      options[:limit] = arg
+    end
+
+    o.parse!(ARGV)
+  end
+      
+  if ARGV.size == 2
+    options[:hashtag] = ARGV[1]
+    command           = Proc.new { |config| Brisbane::Parser.new(config) }
+  else
+    puts "Invalid argument. Run `brisbane fetch --help` for assistance."
+    exit 1
+  end
 when 'build'
-  Brisbane::Site.new.process
-when 'parse'
-  Brisbane::Parser.new(argument).process
+  OptionParser.new do |o|  
+    o.banner = 'Usage: brisbane build [options...]'
+    
+    o.on('--destination DIR') do |arg|
+      options[:dest] = arg
+    end
+
+    o.on('--source DIR') do |arg|
+      options[:source] = arg
+    end
+    
+    o.on('--per-page COUNT', Integer) do |arg|
+      options[:per_page] = arg
+    end
+
+    o.parse!(ARGV)
+  end
+  
+  command = Proc.new { |config| Brisbane::Site.new(config) }
+when '--help'
+  puts help
 else
   puts "Invalid command. Run `brisbane --help` for assistance."
   exit 1
 end
+
+command.call(Brisbane::Configuration.new(:default, options)).process

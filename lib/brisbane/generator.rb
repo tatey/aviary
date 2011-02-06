@@ -1,20 +1,24 @@
 module Brisbane
   class Generator
-    attr_reader :hashtag
+    attr_reader :source, :hashtag
     
-    # TODO: Take path of dir to create
-    def initialize(hashtag)
-      @hashtag = hashtag
+    def initialize(config)
+      @source  = config[:source]
+      @hashtag = config[:hashtag]
     end
     
     def process
+      FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
+      
       DataMapper.auto_migrate!
       
-      file = File.open(File.join(Brisbane.configuration[:source], 'template.erb'), 'w')
-      file.write File.read(File.join(generator_path, 'template.erb')).gsub('{{hashtag}}', self.hashtag)
-      file.close
+      File.open(File.join(self.source, 'template.erb'), 'w') do |file|
+        template = File.read(File.join(generator_path, 'template.erb'))
+        template.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
+        file.write(template)
+      end
       
-      FileUtils.cp_r File.join(generator_path, '_assets'), Brisbane.configuration[:source]
+      FileUtils.cp_r File.join(generator_path, '_assets'), self.source
     end
             
     def generator_path
