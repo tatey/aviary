@@ -13,16 +13,16 @@ module Brisbane
       DataMapper.auto_migrate!
       
       File.open(File.join(self.source, 'template.erb'), 'w') do |file|
-        template = File.read(File.join(generator_path, 'template.erb'))
-        template.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
-        file.write(template)
+        erb = File.read(File.join(template_path, 'template.erb'))
+        erb.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
+        file.write(erb)
       end
       
-      FileUtils.cp_r File.join(generator_path, '_assets'), self.source
+      FileUtils.cp_r File.join(template_path, '_assets'), self.source
     end
             
-    def generator_path
-      File.join(File.dirname(__FILE__), '..', 'generator')
+    def template_path
+      File.join(File.dirname(__FILE__), '..', '..', 'template')
     end
   end
 end

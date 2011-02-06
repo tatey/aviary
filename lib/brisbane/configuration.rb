@@ -18,7 +18,6 @@ module Brisbane
     protected
     
     def default
-      DataMapper::Logger.new($stdout, :debug)
       DataMapper.setup(:default, "sqlite://#{File.join(self[:source], 'db.sqlite3')}")
       DataMapper.finalize
     end
