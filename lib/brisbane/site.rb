@@ -14,8 +14,8 @@ module Brisbane
       
       begin
         render
-        self.paginator.next!
-      end while self.paginator.next?
+        self.paginator.next_page!
+      end while self.paginator.next_page?
       
       FileUtils.cp_r File.join(self.source, '_assets', '.'), 
                      self.dest

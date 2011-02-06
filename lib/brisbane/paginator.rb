@@ -13,7 +13,7 @@ module Brisbane
       {:limit => self.per_page, :offset => self.per_page * (self.current_page - 1)}
     end
         
-    def next?
+    def next_page?
       self.current_page < self.last_page
     end
     
@@ -21,20 +21,16 @@ module Brisbane
       self.current_page + 1
     end
   
-    def next!
+    def next_page!
       @current_page = next_page
     end
   
-    def prev?
+    def prev_page?
       self.current_page > self.first_page
     end
     
     def prev_page
       self.current_page - 1
-    end
-  
-    def prev!
-      @current_page = prev_page
     end
   end
 end
