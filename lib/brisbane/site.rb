@@ -9,25 +9,28 @@ module Brisbane
       @template  = ERB.new(File.read(File.join(self.source, 'template.erb')))
     end    
     
-    # TODO: Branching every time is stupid
-        
     def process
-      render
-      if self.paginator.next?
+      FileUtils.mkdir_p(page_path) unless File.exists?(page_path)
+      
+      begin
+        render
         self.paginator.next!
-        process
-      else
-        FileUtils.cp_r File.join(self.source, '_assets', '.'), self.dest
-        FileUtils.cp File.join(self.dest, "page1", "index.htm"), File.join(self.dest, "index.htm")
-      end
+      end while self.paginator.next?
+      
+      FileUtils.cp_r File.join(self.source, '_assets', '.'), 
+                     self.dest
+      FileUtils.cp   File.join(self.dest, "page1", "index.htm"), 
+                     File.join(self.dest, "index.htm")
     end
     
     def render
-      dir = File.join(self.dest, "page#{self.paginator.current_page}")
-      FileUtils.mkdir_p(dir) unless File.exists?(dir)
-      File.open(File.join(dir, "index.htm"), "w") do |file|
+      File.open(File.join(page_path, "index.htm"), "w") do |file|
         file.write self.template.result(Page.new(self.paginator).binding)
       end
+    end
+    
+    def page_path
+      File.join(self.dest, "page#{self.paginator.current_page}")
     end    
   end
 end
