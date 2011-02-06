@@ -3,10 +3,6 @@ require 'minitest/autorun'
 
 include Brisbane
 
-Brisbane.configuration({})
-# TODO: We shouldn't have to invoke configuration
-# TODO: Setup in-memory DB for testing
+Struct.new("Status", :text)
 
-def stub_status
-  Struct.new("Status", :text).new("Lorem ipsum dolar sit amet")
-end
+Brisbane::Configuration.new(:test, {:source => File.join(File.dirname(__FILE__), 'source')})

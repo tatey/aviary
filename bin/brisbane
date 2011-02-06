@@ -25,7 +25,7 @@ when 'new'
   if ARGV.size == 2
     options[:source]  = File.join(Dir.pwd, ARGV[1])
     options[:hashtag] = ARGV[1]
-    command           = Proc.new { |config| Brisbane::Generator.new(config) }
+    command           = proc { |config| Brisbane::Generator.new(config) }
   else
     puts "Invalid argument. Run `brisbane new --help` for assistance."
     exit 1
@@ -55,7 +55,7 @@ when 'fetch'
       
   if ARGV.size == 2
     options[:hashtag] = ARGV[1]
-    command           = Proc.new { |config| Brisbane::Fetch.new(config) }
+    command           = proc { |config| Brisbane::Fetch.new(config) }
   else
     puts "Invalid argument. Run `brisbane fetch --help` for assistance."
     exit 1
@@ -79,7 +79,7 @@ when 'build'
     o.parse!(ARGV)
   end
   
-  command = Proc.new { |config| Brisbane::Site.new(config) }
+  command = proc { |config| Brisbane::Site.new(config) }
 when '--help'
   puts help
   exit 0

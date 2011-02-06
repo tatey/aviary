@@ -23,7 +23,7 @@ module Brisbane
     end
     
     def test
-      DataMapper.setup(:test, 'sqlite::memory')
+      DataMapper.setup(:default, 'sqlite::memory:')
       DataMapper.finalize
       DataMapper.auto_migrate!
     end
