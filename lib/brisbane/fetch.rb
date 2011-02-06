@@ -1,5 +1,5 @@
 module Brisbane
-  class Parser
+  class Fetch
     attr_reader :twitter, :max_page, :current_page
     
     def initialize(config)
@@ -9,22 +9,22 @@ module Brisbane
     end
     
     def process
-      return unless next_page?
-      self.twitter.each do |status|
-        ImageHost.available.each do |image_host|
-          image_host.match_and_create(status)
+      while next_page? do
+        self.twitter.each do |status|
+          ImageHost.available.each do |image_host|
+            image_host.match_and_create(status)
+          end
         end
+        sleep 1
+        next_page!
       end
-      sleep(1)
-      increment!
-      process
     end
                 
     def next_page?
       self.twitter.next_page? && self.current_page <= self.max_page
     end
     
-    def increment!
+    def next_page!
       @current_page += 1
     end
   end

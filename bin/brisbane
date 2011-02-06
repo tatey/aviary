@@ -60,7 +60,7 @@ when 'fetch'
       
   if ARGV.size == 2
     options[:hashtag] = ARGV[1]
-    command           = Proc.new { |config| Brisbane::Parser.new(config) }
+    command           = Proc.new { |config| Brisbane::Fetch.new(config) }
   else
     puts "Invalid argument. Run `brisbane fetch --help` for assistance."
     exit 1
