@@ -1,12 +1,35 @@
 = Brisbane
 
-Brisbane generates a static photo gallery from Twitter hashtags. Very much a work-in-progress.
+Brisbane generates a static photo gallery from Twitter hashtags. 
+Very much a work-in-progress.
 
 == Examples
 
 * tcyasi[http://tcyasi.tatey.com/]
 * vicfloods[http://vicfloods.tatey.com/]
 
+== Getting Started
+
+1. Install Brisbane at the command prompt if you haven't yet
+    
+     gem install brisbane
+    
+2. At the command prompt, create a new Brisbane template
+
+     brisbane new caturday
+     
+    Where "caturday" is the hashtag
+
+3. Change directory to +caturday+ and fetch tagged tweets with photos
+
+     cd caturday
+     brisbane fetch caturday
+     
+4. Build the gallery from the sqlite database
+
+     brisbane build
+
 == Copyright
 
-Copyright © 2010 Tate Johnson. See LICENSE for details.
+Copyright © 2010 Tate Johnson. Brisbane is released under the MIT license. 
+See LICENSE for details.

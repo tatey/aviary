@@ -15,11 +15,6 @@ Usage:
   brisbane fetch HASHTAG [options...]  # Fetch tagged tweets with photos
   brisbane build         [options...]  # Build gallery
   
-Example:
-  brisbane new ~/qldfloods 
-  brisbane fetch qldfloods
-  brisbane build
-  
 Help:
   brisbane <command> --help
 
