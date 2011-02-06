@@ -11,10 +11,10 @@ help    = <<-HELP
 Brisbane generates a static photo gallery from Twitter hashtags.
 
 Usage:
-  brisbane new   NAME    [hashtag]     # Setup files and directories
+  brisbane new   HASHTAG               # Setup files and directories
   brisbane fetch HASHTAG [options...]  # Fetch tagged tweets with photos
   brisbane build         [options...]  # Build gallery
-
+  
 Example:
   brisbane new ~/qldfloods 
   brisbane fetch qldfloods
@@ -27,19 +27,10 @@ HELP
 
 case ARGV[0]
 when 'new'
-  OptionParser.new do |o|  
-    o.banner = 'Usage: brisbane new NAME [hashtag]'
-    
-    o.on('--hashtag TAG') do |arg|
-      options[:hashtag] = arg
-    end
-
-    o.parse!(ARGV)
-  end
-  
   if ARGV.size == 2
-    options[:source] = File.join(Dir.pwd, ARGV[1])
-    command          = Proc.new { |config| Brisbane::Generator.new(config) }
+    options[:source]  = File.join(Dir.pwd, ARGV[1])
+    options[:hashtag] = ARGV[1]
+    command           = Proc.new { |config| Brisbane::Generator.new(config) }
   else
     puts "Invalid argument. Run `brisbane new --help` for assistance."
     exit 1
@@ -96,6 +87,7 @@ when 'build'
   command = Proc.new { |config| Brisbane::Site.new(config) }
 when '--help'
   puts help
+  exit 0
 else
   puts "Invalid command. Run `brisbane --help` for assistance."
   exit 1
