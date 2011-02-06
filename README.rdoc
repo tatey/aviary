@@ -17,7 +17,7 @@ Very much a work-in-progress.
 2. At the command prompt, create a new Brisbane template
 
      brisbane new caturday
- 
+
     Where "caturday" is the hashtag
 
 3. Change directory and fetch tweets tagged with +caturday+ that have photos
