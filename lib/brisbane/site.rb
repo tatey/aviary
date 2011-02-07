@@ -10,26 +10,33 @@ module Brisbane
     end    
     
     def process
-      FileUtils.mkdir_p(page_path) unless File.exists?(page_path)
-      
-      begin
-        render
+      render
+      if self.paginator.next_page?
         self.paginator.next_page!
-      end while self.paginator.next_page?
-      
-      FileUtils.cp_r File.join(self.source, '_assets', '.'), 
-                     self.dest
-      FileUtils.cp   File.join(self.dest, "page1", "index.htm"), 
-                     File.join(self.dest, "index.htm")
+        process
+      else
+        copy_index
+        copy_assets
+      end
     end
     
     def render
-      File.open(File.join(page_path, "index.htm"), "w") do |file|
+      FileUtils.mkdir_p(current_page_path) unless File.exists?(current_page_path)
+      File.open(File.join(current_page_path, "index.htm"), "w") do |file|
         file.write self.template.result(Page.new(self.paginator).binding)
       end
     end
     
-    def page_path
+    def copy_index
+      FileUtils.cp File.join(self.dest, "page1", "index.htm"), 
+                   File.join(self.dest, "index.htm")
+    end
+    
+    def copy_assets
+      FileUtils.cp_r File.join(self.source, '_assets', '.'), self.dest
+    end
+        
+    def current_page_path
       File.join(self.dest, "page#{self.paginator.current_page}")
     end    
   end

@@ -8,16 +8,21 @@ module Brisbane
     end
     
     def process
-      FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
-      
+      copy_template
+      migrate
+    end
+    
+    def migrate
       DataMapper.auto_migrate!
-      
+    end
+    
+    def copy_template
+      FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
       File.open(File.join(self.source, 'template.erb'), 'w') do |file|
         erb = File.read(File.join(template_path, 'template.erb'))
         erb.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
         file.write(erb)
       end
-      
       FileUtils.cp_r File.join(template_path, '_assets'), self.source
     end
             

@@ -9,15 +9,14 @@ module Brisbane
     end
     
     def process
-      while next_page? do
-        self.twitter.each do |status|
-          ImageHost.available.each do |image_host|
-            image_host.match_and_create(status)
-          end
+      return unless next_page?
+      self.twitter.each do |status|
+        ImageHost.available.each do |image_host|
+          image_host.match_and_create(status)
         end
-        sleep 1
-        next_page!
       end
+      sleep 1
+      next_page!
     end
                 
     def next_page?

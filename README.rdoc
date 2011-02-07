@@ -16,16 +16,22 @@ Very much a work-in-progress.
     
 2. At the command prompt, create a new Brisbane template
 
-     brisbane new caturday
+     brisbane new cat
 
-3. Change directory and fetch tweets tagged with +caturday+ that have photos
+3. Change directory and fetch tweets tagged with +cat+ that have photos
 
-     cd caturday
-     brisbane fetch caturday
+     cd cat
+     brisbane fetch cat
      
 4. Build the gallery from the sqlite database
 
      brisbane build
+     
+== Todo
+
+* Setup bundler
+* More tests
+* Publish gem
 
 == Copyright
 

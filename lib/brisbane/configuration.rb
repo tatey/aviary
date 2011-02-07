@@ -1,5 +1,5 @@
 module Brisbane
-  class Configuration
+  class Configuration    
     def initialize(envrionment, config = {})
       @config           = {}
       @config[:source]  = config[:source] || Dir.pwd

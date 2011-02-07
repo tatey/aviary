@@ -1,109 +1,65 @@
 require 'helper'
 
-describe ImageHost do
-  after do
+class ImageHostTest < MiniTest::Unit::TestCase
+  def setup
+    Brisbane::Configuration.new(:test)
+  end
+  
+  def teardown
+    ImageHost.destroy
     ImageHost.instance_variable_set("@matches", nil)
+    ImageHost.instance_variable_set("@available", nil)
+    ImageHost::Flickr.instance_variable_set("@api_key", nil)
   end
   
-  describe ".available" do
-    after do
-      ImageHost.instance_variable_set("@available", nil)
-      ImageHost::Flickr.instance_variable_set("@api_key", nil)
-    end
-    
-    describe "with flickr api key" do
-      it "should be four children classes" do
-        ImageHost::Flickr.api_key('secret')
-        ImageHost.available.must_equal [ImageHost::Flickr, ImageHost::Plixi, ImageHost::Twitpic, ImageHost::Yfrog]
-      end
-    end
-    
-    describe "without flickr api key" do
-      it "should be three children classes" do
-        ImageHost.available.must_equal [ImageHost::Plixi, ImageHost::Twitpic, ImageHost::Yfrog]
-      end
-    end
+  def test_available_should_have_four_descendants_with_flickr_api_key
+    ImageHost::Flickr.api_key('secret')
+    assert_equal [ImageHost::Flickr, ImageHost::Plixi, ImageHost::Twitpic, ImageHost::Yfrog], ImageHost.available
   end
   
-  describe ".available?" do
-    it "should be true" do
-      ImageHost.available?.must_equal true
-    end
+  def test_available_should_have_three_descendants
+    assert_equal [ImageHost::Plixi, ImageHost::Twitpic, ImageHost::Yfrog], ImageHost.available
   end
   
-  describe ".matches" do
-    it "should set and get regular expressions" do
-      ImageHost.matches /foo/
-      ImageHost.matches.must_equal [/foo/]
-    end
+  def test_available_should_be_true
+    assert ImageHost.available?
   end
   
-  describe ".match" do
-    before do
-      ImageHost.matches /foo/
-      ImageHost.matches /bar/
-    end
-    
-    describe "no matches" do
-      it "should be empty" do
-        ImageHost.match("alice and bob").must_be_empty
-      end
-    end
-    
-    describe "one match" do
-      it "should be one capture" do
-        ImageHost.match("foo before baz").must_equal ["foo"]
-      end
-    end
-    
-    describe "three matches" do
-      it "should be three captures" do
-        ImageHost.match("foo, bar and another foo").must_equal ["foo", "bar", "foo"]
-      end
-    end
+  def test_get_and_set_matches
+    ImageHost.matches /foo/
+    assert_equal [/foo/], ImageHost.matches
   end
   
-  describe ".match_and_create" do
-    before do
-      ImageHost.matches /foo/
-      ImageHost.matches /bar/
-    end
-    
-    after do
-      ImageHost.destroy
-    end
-    
-    describe "no matches" do
-      it "should not create any records" do
-        ImageHost.match_and_create(Struct::Status.new("alice and bob"))
-        ImageHost.count.must_equal 0
-      end
-    end
-    
-    describe "one match" do
-      it "should create one record" do
-        ImageHost.match_and_create(Struct::Status.new("foo before baz"))
-        ImageHost.first.token.must_equal "foo"
-      end
-    end
-    
-    describe "three matches" do
-      it "should not create duplicate records" do
-        ImageHost.match_and_create(Struct::Status.new("foo, bar and a duplicate foo"))
-        ImageHost.all.map { |im| im.token }.must_equal ["foo", "bar"]
-      end
-    end
-  end
-    
-  describe "#href" do
-    it "should raise NotImplementedError" do
-      proc { ImageHost.new.href }.must_raise NotImplementedError
-    end
+  def test_match_should_be_captures
+    ImageHost.matches /foo/
+    ImageHost.matches /bar/
+    assert_equal [], ImageHost.match("alice and bob")
+    assert_equal ["foo"], ImageHost.match("foo before baz") 
+    assert_equal ["foo", "bar", "foo"], ImageHost.match("foo, bar and another foo")
   end
   
-  describe "#src" do
-    it "should raise NotImplementedError" do
-      proc { ImageHost.new.src }.must_raise NotImplementedError
-    end
+  def test_match_and_create_should_create_records
+    ImageHost.matches /foo/
+    ImageHost.match_and_create(Struct::Status.new("alice and bob"))
+    assert_equal 0, ImageHost.count
+
+    ImageHost.match_and_create(Struct::Status.new("foo before baz"))
+    assert_equal 1, ImageHost.count
+  end
+  
+  def test_match_and_create_should_not_duplicate_records
+    ImageHost.matches /foo/
+    ImageHost.matches /bar/
+    ImageHost.match_and_create(Struct::Status.new("foo, bar and a duplicate foo"))
+    assert_equal 2, ImageHost.count
+    assert_equal ["foo", "bar"], ImageHost.all.map { |im| im.token }
+  end
+  
+  def test_href
+    assert_raises(NotImplementedError) { ImageHost.new.href }
+  end
+  
+  def test_src
+    assert_raises(NotImplementedError) { ImageHost.new.src }
   end
 end
