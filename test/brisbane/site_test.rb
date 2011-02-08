@@ -1,4 +1,4 @@
-require 'helper'
+require File.expand_path('../../helper', __FILE__)
 
 class SiteTest < MiniTest::Unit::TestCase
   def setup
@@ -10,6 +10,14 @@ class SiteTest < MiniTest::Unit::TestCase
   def teardown
     ImageHost.destroy
     FileUtils.rm_rf(dest_dir)
+  end
+  
+  def source_dir
+    File.expand_path('../../fixtures/source', __FILE__)
+  end
+  
+  def dest_dir
+    File.join(source_dir, '_site')
   end
   
   def test_process_should_create_dest
@@ -50,19 +58,9 @@ class SiteTest < MiniTest::Unit::TestCase
   end
   
   def test_current_page_path_should_be_path_to_current_page
-    assert_equal "test/source/_site/page1", @site.current_page_path
+    assert_equal File.join(dest_dir, 'page1'), @site.current_page_path
     
     @site.paginator.next_page!
-    assert_equal "test/source/_site/page2", @site.current_page_path
-  end
-  
-  protected
-      
-  def source_dir
-    File.join(File.dirname(__FILE__), 'source')
-  end
-  
-  def dest_dir
-    File.join(source_dir, '_site')
+    assert_equal File.join(dest_dir, 'page2'), @site.current_page_path
   end
 end

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rsp stat="ok">
+<photo id="5332667092" secret="41a375fca3" server="5010" farm="6" dateuploaded="1294387373" isfavorite="0" license="0" safety_level="0" rotation="0" originalsecret="c229b12126" originalformat="jpg" views="17" media="photo">
+	<owner nsid="23054854@N06" username="tatejohnson" realname="Tate Johnson" location="Australia" iconserver="3229" iconfarm="4" />
+	<title>Tate</title>
+	<description />
+	<visibility ispublic="1" isfriend="0" isfamily="0" />
+	<dates posted="1294387373" taken="2011-01-07 16:01:01" takengranularity="0" lastupdate="1294387502" />
+	<editability cancomment="0" canaddmeta="0" />
+	<publiceditability cancomment="1" canaddmeta="0" />
+	<usage candownload="1" canblog="0" canprint="0" canshare="0" />
+	<comments>0</comments>
+	<notes />
+	<tags />
+	<urls>
+		<url type="photopage">http://www.flickr.com/photos/tatejohnson/5332667092/</url>
+	</urls>
+</photo>
+</rsp>

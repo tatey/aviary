@@ -1,10 +1,10 @@
 module Brisbane
   class Fetch
-    attr_reader :twitter, :max_page, :current_page
+    attr_reader :twitter, :limit, :current_page
     
     def initialize(config)
       @twitter      = Twitter::Search.new.filter('links').no_retweets.per_page(100).hashtag(config[:hashtag])
-      @max_page     = config[:limit] || 100
+      @limit        = config[:limit] || 100
       @current_page = 1
     end
     
@@ -20,7 +20,7 @@ module Brisbane
     end
                 
     def next_page?
-      self.twitter.next_page? && self.current_page <= self.max_page
+      self.twitter.next_page? && self.current_page < self.limit
     end
     
     def next_page!

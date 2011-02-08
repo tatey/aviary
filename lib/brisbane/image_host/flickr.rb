@@ -29,12 +29,10 @@ module Brisbane
       "http://farm#{self.meta[:farm_id]}.static.flickr.com/" + 
       "#{self.meta[:server_id]}/#{self.meta[:id]}_#{self.meta[:secret]}_z.jpg"
     end
-    
-    protected
-        
+            
     def set_meta
       uri = URI.parse "http://api.flickr.com/services/rest/?method=flickr" +
-                      ".photos.getInfo&api_key=#{Brisbane.configuration[:flickr_api_key]}" + 
+                      ".photos.getInfo&api_key=#{self.class.api_key}" + 
                       "&photo_id=#{Base58.decode(self.token)}"  
       photo = Nokogiri::XML(open(uri)).css('photo')
       self.meta = {

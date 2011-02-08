@@ -30,7 +30,6 @@ Very much a work-in-progress.
 == Todo
 
 * Setup bundler
-* More tests
 * Publish gem
 
 == Copyright

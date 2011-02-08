@@ -1,4 +1,4 @@
-require 'helper'
+require File.expand_path('../../helper', __FILE__)
 
 class GeneratorTest < MiniTest::Unit::TestCase  
   def setup
@@ -8,6 +8,10 @@ class GeneratorTest < MiniTest::Unit::TestCase
   
   def teardown
     FileUtils.rm_rf(source_dir)
+  end
+  
+  def source_dir
+    File.expand_path('../../fixtures/_source', __FILE__)
   end
     
   def test_copy_template_should_copy_template_to_source
@@ -24,11 +28,5 @@ class GeneratorTest < MiniTest::Unit::TestCase
     FileUtils.mkdir_p(source_dir)
     @generator.migrate
     assert File.exists?(File.join(source_dir, 'db.sqlite3'))
-  end
-    
-  protected
-    
-  def source_dir
-    File.join(File.expand_path(File.dirname(__FILE__)), '_source')
   end
 end

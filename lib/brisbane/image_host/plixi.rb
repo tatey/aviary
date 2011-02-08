@@ -11,9 +11,7 @@ module Brisbane
     def src
       self.meta[:medium_image_url]
     end
-    
-    protected
-    
+        
     def set_meta
       uri = URI.parse("http://api.plixi.com/api/tpapi.svc/photos/#{self.token}")
       doc = Nokogiri::XML(open(uri))
