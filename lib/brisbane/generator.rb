@@ -19,15 +19,15 @@ module Brisbane
     def copy_template
       FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
       File.open(File.join(self.source, 'template.erb'), 'w') do |file|
-        erb = File.read(File.join(template_path, 'template.erb'))
+        erb = File.read(File.join(generator_path, 'template.erb'))
         erb.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
         file.write(erb)
       end
-      FileUtils.cp_r File.join(template_path, '_assets'), self.source
+      FileUtils.cp_r File.join(generator_path, '_assets'), self.source
     end
             
-    def template_path
-      File.join(File.dirname(__FILE__), '..', '..', 'template')
+    def generator_path
+      File.join(File.dirname(__FILE__), '..', '..', 'generator')
     end
   end
 end
