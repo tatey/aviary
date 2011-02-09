@@ -18,10 +18,10 @@ Very much a work-in-progress.
 
      brisbane new cat
 
-3. Change directory and fetch tweets tagged with +cat+ that have photos
+3. Change directory and search tweets tagged with +cat+ that have photos
 
      cd cat
-     brisbane fetch cat
+     brisbane search cat
      
 4. Build the gallery from the sqlite database
 

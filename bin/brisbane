@@ -11,9 +11,9 @@ help    = <<-HELP
 Brisbane generates a static photo gallery from Twitter hashtags.
 
 Usage:
-  brisbane new   HASHTAG               # Setup files and directories
-  brisbane fetch HASHTAG [options...]  # Fetch tagged tweets with photos
-  brisbane build         [options...]  # Build gallery
+  brisbane new    HASHTAG                # Setup files and directories
+  brisbane search HASHTAG [options...]   # Search for tagged tweets with photos
+  brisbane build          [options...]   # Build gallery
   
 Help:
   brisbane <command> --help
@@ -30,9 +30,9 @@ when 'new'
     puts "Invalid argument. Try `brisbane new HASHTAG`"
     exit 1
   end
-when 'fetch'
+when 'search'
   OptionParser.new do |o|  
-    o.banner = 'Usage: brisbane fetch HASHTAG [options...]'
+    o.banner = 'Usage: brisbane search HASHTAG [options...]'
     
     o.on('--destination DIR') do |arg|
       options[:dest] = arg
@@ -55,9 +55,9 @@ when 'fetch'
       
   if ARGV.size == 2
     options[:hashtag] = ARGV[1]
-    command           = -> config { Brisbane::Fetch.new(config) }
+    command           = -> config { Brisbane::Search.new(config) }
   else
-    puts "Invalid argument. Run `brisbane fetch --help` for assistance."
+    puts "Invalid argument. Run `brisbane search --help` for assistance."
     exit 1
   end
 when 'build'

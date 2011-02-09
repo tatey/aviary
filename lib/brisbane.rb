@@ -10,7 +10,7 @@ require 'nokogiri'
 require 'twitter'
 
 require 'brisbane/configuration'
-require 'brisbane/fetch'
+require 'brisbane/search'
 require 'brisbane/generator'
 require 'brisbane/image_host'
 require 'brisbane/image_host/flickr'

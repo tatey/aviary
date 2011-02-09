@@ -1,5 +1,5 @@
 module Brisbane
-  class Fetch
+  class Search
     attr_reader :twitter, :limit, :current_page
     
     def initialize(config)
