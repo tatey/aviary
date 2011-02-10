@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Paginator
     attr_reader :per_page, :current_page, :first_page, :last_page
   

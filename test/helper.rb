@@ -1,8 +1,8 @@
 require 'webmock'
 require 'minitest/autorun'
-require 'brisbane'
+require 'aviary'
 
 include WebMock::API
-include Brisbane
+include Aviary
 
 Struct.new("Status", :text)

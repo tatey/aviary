@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class ImageHost
     include DataMapper::Resource
     

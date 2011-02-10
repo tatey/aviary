@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Configuration    
     def initialize(envrionment, config = {})
       @config           = {}

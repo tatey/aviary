@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Site
     attr_reader :source, :dest, :paginator, :template
     

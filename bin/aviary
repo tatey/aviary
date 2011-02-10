@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+
+$: << File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'optparse'
+require 'aviary'
+
+command = nil
+options = {}
+help    = <<-HELP
+Aviary generates a static photo gallery from Twitter hashtags.
+
+Usage:
+  aviary new    HASHTAG                # Setup files and directories
+  aviary search HASHTAG [options...]   # Search tagged tweets with photos
+  aviary build          [options...]   # Build gallery
+  
+Help:
+  aviary <command> --help
+
+HELP
+
+case ARGV[0]
+when 'new'
+  if ARGV.size == 2 && ARGV[1] != "--help"
+    options[:source]  = File.join(Dir.pwd, ARGV[1])
+    options[:hashtag] = ARGV[1]
+    command           = -> config { Aviary::Generator.new(config) }
+  else
+    puts "Invalid argument. Try `aviary new HASHTAG`"
+    exit 1
+  end
+when 'search'
+  OptionParser.new do |o|  
+    o.banner = 'Usage: aviary search HASHTAG [options...]'
+    
+    o.on('--source DIR', 'Path to source') do |arg|
+      options[:source] = arg
+    end
+    
+    o.on('--flickr-api-key KEY', 'Use photos hosted on Flickr') do |arg|
+      options[:flickr_api_key] = arg
+    end
+    
+    o.on('--limit NUM', Integer, 'Number of pages to search (100 statuses per page)') do |arg|
+      options[:limit] = arg
+    end
+
+    o.parse!(ARGV)
+  end
+      
+  if ARGV.size == 2
+    options[:hashtag] = ARGV[1]
+    command           = -> config { Aviary::Search.new(config) }
+  else
+    puts "Invalid argument. Run `aviary search --help` for assistance."
+    exit 1
+  end
+when 'build'
+  OptionParser.new do |o|  
+    o.banner = 'Usage: aviary build [options...]'
+    
+    o.on('--destination DIR', 'Path to generated gallery') do |arg|
+      options[:dest] = arg
+    end
+
+    o.on('--source DIR', 'Path to source') do |arg|
+      options[:source] = arg
+    end
+    
+    o.on('--per-page NUM', Integer, 'Number of photos per page') do |arg|
+      options[:per_page] = arg
+    end
+
+    o.parse!(ARGV)
+  end
+  
+  command = -> config { Aviary::Site.new(config) }
+when '--help'
+  puts help
+  exit 0
+else
+  puts "Invalid command. Run `aviary --help` for assistance."
+  exit 1
+end
+
+command.call(Aviary::Configuration.new(:default, options)).process

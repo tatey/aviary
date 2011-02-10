@@ -2,7 +2,7 @@ require File.expand_path('../../helper', __FILE__)
 
 class SiteTest < MiniTest::Unit::TestCase
   def setup
-    Brisbane::Configuration.new(:test)
+    Aviary::Configuration.new(:test)
     10.times { |n| ImageHost.create(:token => n) }
     @site = Site.new(source: source_dir, dest: dest_dir, per_page: 5)
   end

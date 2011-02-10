@@ -2,7 +2,7 @@ require File.expand_path('../../helper', __FILE__)
 
 class ImageHostTest < MiniTest::Unit::TestCase
   def setup
-    Brisbane::Configuration.new(:test)
+    Aviary::Configuration.new(:test)
   end
   
   def teardown

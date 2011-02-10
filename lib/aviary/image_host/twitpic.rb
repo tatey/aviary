@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class ImageHost::Twitpic < ImageHost  
     matches /twitpic\.com\/(\w+)/
     

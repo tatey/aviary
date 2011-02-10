@@ -2,7 +2,7 @@ require File.expand_path('../../../helper', __FILE__)
 
 class FlickrTest < MiniTest::Unit::TestCase
   def setup
-    Brisbane::Configuration.new(:test)
+    Aviary::Configuration.new(:test)
     ImageHost::Flickr.api_key('secret')
   end
   

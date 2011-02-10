@@ -2,7 +2,7 @@ require File.expand_path('../../helper', __FILE__)
 
 class PaginatorTest < MiniTest::Unit::TestCase
   def setup 
-    Brisbane::Configuration.new(:test)
+    Aviary::Configuration.new(:test)
     10.times { |n| ImageHost.create(:token => n) }
     @paginator = Paginator.new(5)
   end

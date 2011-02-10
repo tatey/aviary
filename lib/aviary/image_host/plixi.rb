@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class ImageHost::Plixi < ImageHost
     before :create, :set_meta
     

@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class ImageHost::Flickr < ImageHost
     before :create, :set_meta
   

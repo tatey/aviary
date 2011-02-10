@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Generator
     attr_reader :source, :hashtag
     

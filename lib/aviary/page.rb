@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Page
     attr_reader :paginator, :image_hosts
         

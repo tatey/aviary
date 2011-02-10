@@ -2,7 +2,7 @@ require File.expand_path('../../../helper', __FILE__)
 
 class PlixiTest < MiniTest::Unit::TestCase
   def setup
-    Brisbane::Configuration.new(:test)
+    Aviary::Configuration.new(:test)
     stub_request(:get, "http://api.plixi.com/api/tpapi.svc/photos/74226939").
       to_return(:status => 200, :body => File.read(File.expand_path('../../../fixtures/plixi.xml', __FILE__)))
     @plixie = ImageHost::Plixi.create(:token => '74226939')

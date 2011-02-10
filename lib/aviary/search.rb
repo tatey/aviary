@@ -1,4 +1,4 @@
-module Brisbane
+module Aviary
   class Search
     attr_reader :twitter, :limit, :current_page
     
