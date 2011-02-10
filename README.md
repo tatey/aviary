@@ -96,6 +96,10 @@ Aviary has been developed against Ruby 1.9 and will not work with Ruby 1.8. Ruby
 * MiniTest
 * Webmock
 
+## Why the Name?
+
+Aviary is defined as "A large cage for keeping birds in". Replace cage with "photo gallery" and birds with "tweets".
+
 ## Copyright
 
 Copyright © 2010 Tate Johnson. Aviary is released under the MIT license. See LICENSE for details.
