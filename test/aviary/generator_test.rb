@@ -18,6 +18,7 @@ class GeneratorTest < MiniTest::Unit::TestCase
     @generator.copy_template
     assert File.exists?(File.join(source_dir, '_assets', 'aviary.css'))
     assert File.exists?(File.join(source_dir, '_assets', 'aviary.js'))
+    assert File.exists?(File.join(source_dir, '_assets', 'loader.gif'))
     
     html = Nokogiri::HTML(File.read(File.join(source_dir, 'template.erb')))
     assert_equal "#cat", html.css('title').text
