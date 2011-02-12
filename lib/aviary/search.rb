@@ -18,7 +18,11 @@ module Aviary
       sleep 1
       next_page!
     end
-                
+    
+    # True if there is another page to fetch from Twitter and
+    # we haven't exceeded the limit.
+    #
+    # Returns boolean.            
     def next_page?
       self.twitter.next_page? && self.current_page < self.limit
     end

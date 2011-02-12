@@ -24,10 +24,22 @@ Change directory and for search tweets tagged with `bird` that have photos
 Build the static photo gallery
 
     aviary build
-    
-## Commands and Options
-    
-Run `aviary --help` for for a complete list of commands and options.
+
+## Dependencies
+
+Ruby 1.9
+
+### Runtime
+
+* Base58
+* DataMapper (Core, Migrations and Validations)
+* Nokoigir
+* Twitter
+
+### Developer
+
+* MiniTest
+* Webmock
 
 ## Customising the Template
 
@@ -63,7 +75,7 @@ Pages are plain ERB templates. You get access to the photos and pagination for t
       
     &lt;script&gt;
 
-### _assets directory
+### _assets
 
 Anything inside the `_assets` directory is recursively copied into the root of the destination directory. 
 
@@ -79,22 +91,6 @@ Be careful not to name any of your assets with the following names:
 * _assets/page2
 * ...
 * _assets/pageN
-
-## Dependencies
-
-Aviary has been developed against Ruby 1.9 and will not work with Ruby 1.8. Ruby 1.9 is my default and it should be yours too.
-
-### Runtime
-
-* Base58
-* DataMapper (Core, Migrations and Validations)
-* Nokoigir
-* Twitter
-
-### Developer
-
-* MiniTest
-* Webmock
 
 ## Why the Name?
 

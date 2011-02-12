@@ -5,11 +5,18 @@ module Aviary
     matches /flic\.kr\/p\/(\w+)/
     matches /flickr\.com\/photos\/\w+\/(\d+)/
     
+    # Get and set the API key. Passing an argument sets the
+    # API key. Passing nothing gets the API key.
+    #
+    # Returns api key. 
     def self.api_key(key = nil)
       @api_key = key if key
       @api_key
     end
     
+    # True if the API key has been set.
+    #
+    # Returns boolean.
     def self.available?
       !api_key.nil?
     end

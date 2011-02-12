@@ -27,11 +27,20 @@ module Aviary
       end
     end
     
+    # Copies the first page and makes it the index at the root
+    # of the +dest+ directory.
+    #
+    # Returns nothing.
     def copy_index
       FileUtils.cp File.join(self.dest, "page1", "index.htm"), 
                    File.join(self.dest, "index.htm")
     end
     
+    # Recursively copy the contents of the +_assets+ directory into
+    # the root of the +dest+ directory. Useful for sharing CSS,
+    # JavaScript or images between pages.
+    #
+    # Returns nothing.
     def copy_assets
       FileUtils.cp_r File.join(self.source, '_assets', '.'), self.dest
     end

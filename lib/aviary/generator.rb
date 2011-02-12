@@ -12,10 +12,17 @@ module Aviary
       migrate
     end
     
+    # Migrates the database for the first time.
+    #
+    # Returns nothing.
     def migrate
       DataMapper.auto_migrate!
     end
     
+    # Copies the contents of the +generator+ directory into
+    # the +source+ directory for setting up a new aviary.
+    # 
+    # Returns nothing.
     def copy_template
       FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
       File.open(File.join(self.source, 'template.erb'), 'w') do |file|

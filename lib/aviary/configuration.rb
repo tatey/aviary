@@ -11,6 +11,9 @@ module Aviary
       send(envrionment)
     end
     
+    # Get the value for the given key.
+    #
+    # Returns value.
     def [](key)
       @config[key]
     end
