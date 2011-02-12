@@ -15,8 +15,8 @@ module Aviary
           image_host.match_and_create(status)
         end
       end
-      sleep 1
       next_page!
+      process
     end
     
     # True if there is another page to fetch from Twitter and
