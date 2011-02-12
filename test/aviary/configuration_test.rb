@@ -11,6 +11,10 @@ class ConfigurationTest < MiniTest::Unit::TestCase
     assert_equal File.join(Dir.pwd, '_site'), config[:dest]
   end
   
+  def test_configuration_with_per_page_sets_per_page
+    assert_equal 5, Configuration.new(:test, {:per_page => 5})[:per_page]
+  end
+  
   def test_configuration_with_hashtag_sets_hashtag
     assert_equal 'cat', Configuration.new(:test, {:hashtag => 'cat'})[:hashtag]
   end

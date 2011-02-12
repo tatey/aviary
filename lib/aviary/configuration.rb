@@ -1,11 +1,12 @@
 module Aviary
   class Configuration    
     def initialize(envrionment, config = {})
-      @config           = {}
-      @config[:source]  = config[:source] || Dir.pwd
-      @config[:dest]    = config[:dest] || File.join(@config[:source], '_site')
-      @config[:hashtag] = config[:hashtag]
-      
+      @config            = {}
+      @config[:source]   = config[:source] || Dir.pwd
+      @config[:dest]     = config[:dest] || File.join(@config[:source], '_site')
+      @config[:hashtag]  = config[:hashtag]
+      @config[:per_page] = config[:per_page]
+
       ImageHost::Flickr.api_key(config[:flickr_api_key])
       
       send(envrionment)
