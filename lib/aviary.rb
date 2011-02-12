@@ -1,7 +1,9 @@
+# Standard library
 require 'erb'
 require 'fileutils'
 require 'open-uri'
 
+# Third pary
 require 'rubygems'
 require 'base58'
 require 'dm-core'
@@ -11,6 +13,7 @@ require 'dm-validations'
 require 'nokogiri'
 require 'twitter'
 
+# Internal
 require 'aviary/configuration'
 require 'aviary/generator'
 require 'aviary/image_host'
@@ -22,3 +25,4 @@ require 'aviary/page'
 require 'aviary/paginator'
 require 'aviary/search'
 require 'aviary/site'
+require 'aviary/version'

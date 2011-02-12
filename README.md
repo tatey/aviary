@@ -1,6 +1,6 @@
 # Aviary
 
-Aviary generates a static photo gallery from Twitter hashtags.
+Aviary generates a static photo gallery using Twitter hashtags.
 
 Twitter is a fantastic resource for discovering photos of events as they unfold. Searching by hastag means you have to do the filtering. Commentary and relinking drown new and interesting photos. In the days the water rose during the 2011 Brisbane floods I wished there was a way to see all the photos without the noise. Now there is.
 
@@ -18,12 +18,19 @@ At the command prompt, create a new Aviary template
 
 Change directory and for search tweets tagged with `bird` that have photos
 
-    cd bird
+    cd bird/
     aviary search bird
      
 Build the static photo gallery
 
     aviary build
+    
+Preview
+
+    cd _site/
+    gem install asdf
+    asdf .
+    open http://localhost:9292/index.htm
 
 ## Dependencies
 
@@ -37,8 +44,9 @@ Build the static photo gallery
 * Nokoigir
 * Twitter
 
-### Developer
+### Development
 
+* Bundler
 * MiniTest
 * Webmock
 

@@ -4,7 +4,7 @@ module Aviary
     
     def initialize(config)
       @twitter      = Twitter::Search.new.filter('links').no_retweets.per_page(100).hashtag(config[:hashtag])
-      @limit        = config[:limit] || 100
+      @limit        = config[:limit] || 50
       @current_page = 1
     end
     
