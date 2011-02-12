@@ -27,12 +27,13 @@ Build the static photo gallery
 
 ## Dependencies
 
-Ruby 1.9
+* Ruby 1.8.7, 1.9.2
+* SQLite3 
 
 ### Runtime
 
 * Base58
-* DataMapper (Core, Migrations and Validations)
+* DataMapper (Core, SQLite Adapter, Migrations and Validations)
 * Nokoigir
 * Twitter
 

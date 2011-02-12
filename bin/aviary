@@ -25,7 +25,7 @@ when 'new'
   if ARGV.size == 2 && ARGV[1] != "--help"
     options[:source]  = File.join(Dir.pwd, ARGV[1])
     options[:hashtag] = ARGV[1]
-    command           = -> config { Aviary::Generator.new(config) }
+    command           = proc { |config| Aviary::Generator.new(config) }
   else
     puts "Invalid argument. Try `aviary new HASHTAG`"
     exit 1
@@ -51,7 +51,7 @@ when 'search'
       
   if ARGV.size == 2
     options[:hashtag] = ARGV[1]
-    command           = -> config { Aviary::Search.new(config) }
+    command           = proc { |config| Aviary::Search.new(config) }
   else
     puts "Invalid argument. Run `aviary search --help` for assistance."
     exit 1
@@ -75,7 +75,7 @@ when 'build'
     o.parse!(ARGV)
   end
   
-  command = -> config { Aviary::Site.new(config) }
+  command = proc { |config| Aviary::Site.new(config) }
 when '--help'
   puts help
   exit 0

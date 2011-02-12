@@ -1,6 +1,6 @@
+require 'aviary'
 require 'webmock'
 require 'minitest/autorun'
-require 'aviary'
 
 include WebMock::API
 include Aviary

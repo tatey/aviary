@@ -12,10 +12,10 @@ class PaginatorTest < MiniTest::Unit::TestCase
   end
   
   def test_query_options_should_limit_results
-    assert_equal({limit: 5, offset: 0}, @paginator.query_options)
+    assert_equal({:limit => 5, :offset => 0}, @paginator.query_options)
     
     @paginator.next_page!
-    assert_equal({limit: 5, offset: 5}, @paginator.query_options)
+    assert_equal({:limit => 5, :offset => 5}, @paginator.query_options)
   end
   
   def test_next_page_boolean
