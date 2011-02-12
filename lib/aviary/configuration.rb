@@ -6,6 +6,7 @@ module Aviary
       @config[:dest]     = config[:dest] || File.join(@config[:source], '_site')
       @config[:hashtag]  = config[:hashtag]
       @config[:per_page] = config[:per_page]
+      @config[:limit]    = config[:limit]
 
       ImageHost::Flickr.api_key(config[:flickr_api_key])
       

@@ -15,6 +15,10 @@ class ConfigurationTest < MiniTest::Unit::TestCase
     assert_equal 5, Configuration.new(:test, {:per_page => 5})[:per_page]
   end
   
+  def test_configuration_with_limit_sets_limit
+    assert_equal 100, Configuration.new(:test, {:limit => 100})[:limit]
+  end
+  
   def test_configuration_with_hashtag_sets_hashtag
     assert_equal 'cat', Configuration.new(:test, {:hashtag => 'cat'})[:hashtag]
   end
