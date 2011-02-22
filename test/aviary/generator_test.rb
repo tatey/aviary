@@ -3,7 +3,7 @@ require File.expand_path('../../helper', __FILE__)
 class GeneratorTest < MiniTest::Unit::TestCase  
   def setup
     config     = Aviary::Configuration.new(:default, :source => source_dir)
-    @generator = Generator.new(:source => config[:source], :hashtag => "cat")
+    @generator = Generator.new(:source => config[:source], :query => "cat")
   end
   
   def teardown

@@ -4,7 +4,7 @@ module Aviary
       @config            = {}
       @config[:source]   = config[:source] || Dir.pwd
       @config[:dest]     = config[:dest] || File.join(@config[:source], '_site')
-      @config[:hashtag]  = config[:hashtag]
+      @config[:query]    = config[:query]
       @config[:per_page] = config[:per_page]
       @config[:limit]    = config[:limit]
 

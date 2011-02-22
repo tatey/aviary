@@ -1,10 +1,10 @@
 module Aviary
   class Generator
-    attr_reader :source, :hashtag
+    attr_reader :source, :query
     
     def initialize(config)
       @source  = config[:source]
-      @hashtag = config[:hashtag]
+      @query = config[:query]
     end
     
     def process
@@ -27,7 +27,7 @@ module Aviary
       FileUtils.mkdir_p(self.source) unless File.exists?(self.source)
       File.open(File.join(self.source, 'template.erb'), 'w') do |file|
         erb = File.read(File.join(generator_path, 'template.erb'))
-        erb.gsub!('{{hashtag}}', self.hashtag) if self.hashtag
+        erb.gsub!('{{query}}', self.query) if self.query
         file.write(erb)
       end
       FileUtils.cp_r File.join(generator_path, '_assets'), self.source

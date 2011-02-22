@@ -3,15 +3,15 @@
   <head> 
     <meta name="generator" content="Aviary <%= Aviary::VERSION %> - https://github.com/tatey/aviary">
     <meta charset="utf-8"> 
-    <title>#{{hashtag}}</title> 
+    <title>#{{query}}</title> 
     <link type="text/css" rel="stylesheet" href="/aviary.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script type="text/javascript" src="/aviary.js"></script>
   </head>
   <body>
-    <h1><a href="/">#{{hashtag}}</a></h1>
+    <h1><a href="/">#{{query}}</a></h1>
     <p>
-      A raw collection of photos tweeted with <a href="http://twitter.com/search/%23{{hashtag}}">#{{hashtag}}</a>
+      A raw collection of photos tweeted with <a href="http://twitter.com/search/%23{{query}}">#{{query}}</a>
     </p>
     <ul>
       <% image_hosts.each do |image_host| %>

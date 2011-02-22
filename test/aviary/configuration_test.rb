@@ -19,8 +19,8 @@ class ConfigurationTest < MiniTest::Unit::TestCase
     assert_equal 100, Configuration.new(:test, {:limit => 100})[:limit]
   end
   
-  def test_configuration_with_hashtag_sets_hashtag
-    assert_equal 'cat', Configuration.new(:test, {:hashtag => 'cat'})[:hashtag]
+  def test_configuration_with_query_sets_query
+    assert_equal 'cat', Configuration.new(:test, {:query => 'cat'})[:query]
   end
   
   def test_configuration_with_flickr_api_key_sets_api_key

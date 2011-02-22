@@ -3,7 +3,7 @@ module Aviary
     attr_reader :twitter, :limit, :current_page
     
     def initialize(config)
-      @twitter      = Twitter::Search.new.filter('links').no_retweets.per_page(100).hashtag(config[:hashtag])
+      @twitter      = Twitter::Search.new.filter('links').no_retweets.per_page(100).containing(config[:query])
       @limit        = config[:limit] || 50
       @current_page = 1
     end

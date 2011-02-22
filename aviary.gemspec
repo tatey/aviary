@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ['tate@tatey.com']
   s.homepage    = 'https://github.com/tatey/aviary'
   s.summary     = %q{A static photo gallery generator for Twitter}
-  s.description = %q{Aviary generates a static photo gallery using Twitter hashtags}
+  s.description = %q{Aviary generates a static photo gallery using Twitter}
 
   s.rubyforge_project = s.name
 

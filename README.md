@@ -1,8 +1,8 @@
 # Aviary
 
-Aviary generates a static photo gallery using Twitter hashtags.
+Aviary generates a static photo gallery using Twitter.
 
-Twitter is a fantastic resource for discovering photos of events as they unfold. Searching by hastag means you have to do the filtering. Commentary and relinking drown new and interesting photos. In the days the water rose during the 2011 Brisbane floods I wished there was a way to see all the photos without the noise. Now there is.
+Twitter is a fantastic resource for discovering photos of events as they unfold. Searching using your preferred client means you have to do the filtering. Commentary and relinking drown new and interesting photos. In the days the water rose during the 2011 Brisbane floods I wished there was a way to see all the photos without the noise. Now there is.
 
 See the wiki for a [listing of galleries](https://github.com/tatey/aviary/wiki/galleries).
 
@@ -37,18 +37,10 @@ Preview
 * Ruby 1.8.7, 1.9.2
 * SQLite3 
 
-### Runtime
+If you're interested in extending Aviary, you can get all the gem dependancies using Bundler.
 
-* Base58
-* DataMapper (Core, SQLite Adapter, Migrations and Validations)
-* Nokoigir
-* Twitter
-
-### Development
-
-* Bundler
-* MiniTest
-* Webmock
+    gem install bundler
+    bundle install
 
 ## Customising the Template
 

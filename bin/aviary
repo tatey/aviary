@@ -8,12 +8,12 @@ require 'aviary'
 command = nil
 options = {}
 help    = <<-HELP
-Aviary generates a static photo gallery from Twitter hashtags.
+Aviary generates a static photo gallery from Twitter.
 
 Usage:
-  aviary new    HASHTAG                # Setup files and directories
-  aviary search HASHTAG [options...]   # Search tagged tweets with photos
-  aviary build          [options...]   # Build gallery
+  aviary new    QUERY                 # Setup files and directories
+  aviary search QUERY [options...]    # Search tweets with photos
+  aviary build          [options...]  # Build gallery
   
 Help:
   aviary <command> --help
@@ -24,15 +24,15 @@ case ARGV[0]
 when 'new'
   if ARGV.size == 2 && ARGV[1] != "--help"
     options[:source]  = File.join(Dir.pwd, ARGV[1])
-    options[:hashtag] = ARGV[1]
+    options[:query]   = ARGV[1]
     command           = proc { |config| Aviary::Generator.new(config) }
   else
-    puts "Invalid argument. Try `aviary new HASHTAG`"
+    puts "Invalid argument. Try `aviary new QUERY`"
     exit 1
   end
 when 'search'
   OptionParser.new do |o|  
-    o.banner = 'Usage: aviary search HASHTAG [options...]'
+    o.banner = 'Usage: aviary search QUERY [options...]'
     
     o.on('--source DIR', 'Path to source') do |arg|
       options[:source] = arg
@@ -50,8 +50,8 @@ when 'search'
   end
       
   if ARGV.size == 2
-    options[:hashtag] = ARGV[1]
-    command           = proc { |config| Aviary::Search.new(config) }
+    options[:query] = ARGV[1]
+    command         = proc { |config| Aviary::Search.new(config) }
   else
     puts "Invalid argument. Run `aviary search --help` for assistance."
     exit 1
