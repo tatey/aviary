@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3
+
+* Removed rubygems dependancy at runtime
+
 ## 1.0.2 / 2011-02-22
 
 * Searches are no longer restricted to hashtags

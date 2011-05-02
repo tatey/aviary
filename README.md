@@ -34,7 +34,7 @@ Preview
 
 ## Dependencies
 
-* Ruby 1.8.7, 1.9.2
+* Ruby 1.8.7-p334, 1.9.2-p180
 * SQLite3 
 
 If you're interested in extending Aviary, you can get all the gem dependancies using Bundler.
