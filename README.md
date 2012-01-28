@@ -4,7 +4,7 @@ Aviary generates a static photo gallery using Twitter.
 
 Twitter is a fantastic resource for discovering photos of events as they unfold. Searching using your preferred client means you have to do the filtering. Commentary and relinking drown new and interesting photos. In the days the water rose during the 2011 Brisbane floods I wished there was a way to see all the photos without the noise. Now there is.
 
-See the wiki for a [listing of galleries](https://github.com/tatey/aviary/wiki/galleries).
+See an [example gallery](http://aviary.github.com/).
 
 ## Getting Started
 
